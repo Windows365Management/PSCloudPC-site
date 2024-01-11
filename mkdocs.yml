@@ -29,6 +29,7 @@ nav:
       - 'Remove-CPCAzureNetworkConnection': 'cmdlets/Remove-CPCAzureNetworkConnection.md'
       - 'Remove-CPCCustomImage': 'cmdlets/Remove-CPCCustomImage.md'
       - 'Remove-CPCUserSettingsPolicy': 'cmdlets/Remove-CPCUserSettingsPolicy.md'
+      - 'Remove-CPCProvisioningPolicy': 'cmdlets/Remove-CPCProvisioningPolicy.md'
       - 'Set-CPCProvisioningPolicyAssignment': 'cmdlets/Set-CPCProvisioningPolicyAssignment.md'
       - 'Set-CPCUserSettingsPolicyAssignment': 'cmdlets/Set-CPCUserSettingsPolicyAssignment.md'
       - 'Update-CPCOrganizationSettings': 'cmdlets/Update-CPCOrganizationSettings.md'
