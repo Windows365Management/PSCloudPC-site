@@ -19,5 +19,5 @@ jobs:
               pip install mkdocs-include-dir-to-nav
               pip install pillow cairosvg
           - name: Deploy
-            working-directory: /
+            working-directory: .
             run: mkdocs gh-deploy --force
