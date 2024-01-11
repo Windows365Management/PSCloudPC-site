@@ -1,5 +1,5 @@
 site_name: PSCloudPC - Windows 365 Management PowerShell Module
-site_url: https://Windows365Management.github.io/PSCloudPC
+site_url: https://Windows365Management.github.io/PSCloudPC-Site
 nav:
   - Home:
     - 'About PSCloudPC': 'index.md'
@@ -8,32 +8,32 @@ nav:
     - 'Authentication': 'getting-started/authentication.md'
   - 'User Guide':
     - Cmdlets:
-      - 'Connect-Windows365': 'Docs/Connect-Windows365.md'
-      - 'Get-CloudPC': 'Docs/Get-CloudPC.md'
-      - 'Get-CPCAzureNetworkConnection': 'Docs/Get-CPCAzureNetworkConnection.md'
-      - 'Get-CPCCustomImage': 'Docs/Get-CPCCustomImage.md'
-      - 'Get-CPCGalleryImage' : 'Docs/Get-CPCGalleryImage.md'
-      - 'Get-CPCOrganizationSettings': 'Docs/Get-CPCOrganizationSettings.md'
-      - 'Get-CPCProvisioningPolicy': 'Docs/Get-CPCProvisioningPolicy.md'
-      - 'Get-CPCRestorePoint': 'Docs/Get-CPCRestorePoint.md'
-      - 'Get-CPCServicePlans': 'Docs/Get-CPCServicePlans.md'
-      - 'Get-CPCSupportedRegion': 'Docs/Get-CPCSupportedRegion.md'
-      - 'Get-CPCUserSettingsPolicy': 'Docs/Get-CPCUserSettingsPolicy.md'
-      - 'Invoke-CPCEndGracePeriod': 'Docs/Invoke-CPCEndGracePeriod.md'
-      - 'Invoke-CPCReprovision': 'Docs/Invoke-CPCReprovision.md'
-      - 'Invoke-CPCRestore': 'Docs/Invoke-CPCRestore.md'
-      - 'New-CPCAzureNetworkConnection': 'Docs/New-CPCAzureNetworkConnection.md'
-      - 'New-CPCCustomImage': 'Docs/New-CPCCustomImage.md'
-      - 'New-CPCProvisioningPolicy': 'Docs/New-CPCProvisioningPolicy.md'
-      - 'New-CPCUserSettingsPolicy': 'Docs/New-CPCUserSettingsPolicy.md'
-      - 'Remove-CPCAzureNetworkConnection': 'Docs/Remove-CPCAzureNetworkConnection.md'
-      - 'Remove-CPCCustomImage': 'Docs/Remove-CPCCustomImage.md'
-      - 'Remove-CPCUserSettingsPolicy': 'Docs/Remove-CPCUserSettingsPolicy.md'
-      - 'Set-CPCProvisioningPolicyAssignment': 'Docs/Set-CPCProvisioningPolicyAssignment.md'
-      - 'Set-CPCUserSettingsPolicyAssignment': 'Docs/Set-CPCUserSettingsPolicyAssignment.md'
-      - 'Update-CPCOrganizationSettings': 'Docs/Update-CPCOrganizationSettings.md'
-      - 'Update-CPCProvisioningPolicy': 'Docs/Update-CPCProvisioningPolicy.md'
-      - 'Update-CPCUserSettingsPolicy': 'Docs/Update-CPCUserSettingsPolicy.md'
+      - 'Connect-Windows365': 'docs/Connect-Windows365.md'
+      - 'Get-CloudPC': 'docs/Get-CloudPC.md'
+      - 'Get-CPCAzureNetworkConnection': 'docs/Get-CPCAzureNetworkConnection.md'
+      - 'Get-CPCCustomImage': 'docs/Get-CPCCustomImage.md'
+      - 'Get-CPCGalleryImage': 'docs/Get-CPCGalleryImage.md'
+      - 'Get-CPCOrganizationSettings': 'docs/Get-CPCOrganizationSettings.md'
+      - 'Get-CPCProvisioningPolicy': 'docs/Get-CPCProvisioningPolicy.md'
+      - 'Get-CPCRestorePoint': 'docs/Get-CPCRestorePoint.md'
+      - 'Get-CPCServicePlans': 'docs/Get-CPCServicePlans.md'
+      - 'Get-CPCSupportedRegion': 'docs/Get-CPCSupportedRegion.md'
+      - 'Get-CPCUserSettingsPolicy': 'docs/Get-CPCUserSettingsPolicy.md'
+      - 'Invoke-CPCEndGracePeriod': 'docs/Invoke-CPCEndGracePeriod.md'
+      - 'Invoke-CPCReprovision': 'docs/Invoke-CPCReprovision.md'
+      - 'Invoke-CPCRestore': 'docs/Invoke-CPCRestore.md'
+      - 'New-CPCAzureNetworkConnection': 'docs/New-CPCAzureNetworkConnection.md'
+      - 'New-CPCCustomImage': 'docs/New-CPCCustomImage.md'
+      - 'New-CPCProvisioningPolicy': 'docs/New-CPCProvisioningPolicy.md'
+      - 'New-CPCUserSettingsPolicy': 'docs/New-CPCUserSettingsPolicy.md'
+      - 'Remove-CPCAzureNetworkConnection': 'docs/Remove-CPCAzureNetworkConnection.md'
+      - 'Remove-CPCCustomImage': 'docs/Remove-CPCCustomImage.md'
+      - 'Remove-CPCUserSettingsPolicy': 'docs/Remove-CPCUserSettingsPolicy.md'
+      - 'Set-CPCProvisioningPolicyAssignment': 'docs/Set-CPCProvisioningPolicyAssignment.md'
+      - 'Set-CPCUserSettingsPolicyAssignment': 'docs/Set-CPCUserSettingsPolicyAssignment.md'
+      - 'Update-CPCOrganizationSettings': 'docs/Update-CPCOrganizationSettings.md'
+      - 'Update-CPCProvisioningPolicy': 'docs/Update-CPCProvisioningPolicy.md'
+      - 'Update-CPCUserSettingsPolicy': 'docs/Update-CPCUserSettingsPolicy.md'
   - 'Contributing': 'contributing/contribution-guidelines.md'
   - 'About': 'about/about.md'
 plugins:
@@ -93,3 +93,6 @@ extra:
       make our documentation better.
 repo_url: https://github.com/Windows365Management/PSCloudPC
 copyright: PSCloudPC
+docs_dir: docs
+edit_uri: edit/main/src/
+site_dir: site
