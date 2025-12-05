@@ -41,3 +41,4 @@ jobs:
         with:
           commit_message: "Regenerated Docs"
           file_pattern: "docs/*"
+          repository: "./PSCloudPC-site"
