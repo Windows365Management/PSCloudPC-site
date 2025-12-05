@@ -5,39 +5,44 @@ online version:
 schema: 2.0.0
 ---
 
-# Remove-CPCAzureNetworkConnection
+# Get-CPCServicePlan
 
 ## SYNOPSIS
-Removes a Cloud PC Azure Network Connection
+This function will return all currently available service plans
 
 ## SYNTAX
 
 ```
-Remove-CPCAzureNetworkConnection [-Name] <String> [-ProgressAction <ActionPreference>] [<CommonParameters>]
+Get-CPCServicePlan [-ServicePlanName <String>] [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-The function will remove a Cloud PC Azure Network Connection
+This function will return all currently available service plans
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```
-Remove-CPCAzureNetworkConnection -name "Azure Network Connection 01"
+Get-CPCServicePlans
+```
+
+### EXAMPLE 2
+```
+Get-CPCServicePlans -ServicePlanType "enterprise"
 ```
 
 ## PARAMETERS
 
-### -Name
-Enter the name of the Cloud PC Azure Network Connection
+### -ServicePlanName
+{{ Fill ServicePlanName Description }}
 
 ```yaml
 Type: String
 Parameter Sets: (All)
 Aliases:
 
-Required: True
-Position: 1
+Required: False
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

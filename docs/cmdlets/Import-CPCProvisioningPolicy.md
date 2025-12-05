@@ -5,31 +5,31 @@ online version:
 schema: 2.0.0
 ---
 
-# Remove-CPCAzureNetworkConnection
+# Import-CPCProvisioningPolicy
 
 ## SYNOPSIS
-Removes a Cloud PC Azure Network Connection
+Imports a Provisioning Policy from a JSON File
 
 ## SYNTAX
 
 ```
-Remove-CPCAzureNetworkConnection [-Name] <String> [-ProgressAction <ActionPreference>] [<CommonParameters>]
+Import-CPCProvisioningPolicy -Inputfile <String> [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-The function will remove a Cloud PC Azure Network Connection
+The function will import a Provisioning Policy from a JSON File
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```
-Remove-CPCAzureNetworkConnection -name "Azure Network Connection 01"
+Import-CPCProvisioningPolicy -Inputfile "C:\Temp\AzureADJoinPolicy.json"
 ```
 
 ## PARAMETERS
 
-### -Name
-Enter the name of the Cloud PC Azure Network Connection
+### -Inputfile
+Enter the path to the JSON File
 
 ```yaml
 Type: String
@@ -37,7 +37,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: True
-Position: 1
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
