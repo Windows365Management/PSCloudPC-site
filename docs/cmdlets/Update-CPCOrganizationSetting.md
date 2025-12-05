@@ -5,48 +5,67 @@ online version:
 schema: 2.0.0
 ---
 
-# Update-CPCUserSettingsPolicy
+# Update-CPCOrganizationSetting
 
 ## SYNOPSIS
-Updates a User Settings Policy in the Intune Cloud PC Service
+Update the Cloud PC organization settings
 
 ## SYNTAX
 
 ```
-Update-CPCUserSettingsPolicy -Name <String> [-LocalAdminEnabled <Boolean>] [-ResetEnabled <Boolean>]
- [-UserRestoreEnabled <Boolean>] [-UserRestoreFrequency <Object>] [-ProgressAction <ActionPreference>]
- [<CommonParameters>]
+Update-CPCOrganizationSetting [[-OSVersion] <String>] [[-UserAccountType] <String>]
+ [[-EnableMEMAutoEnroll] <Boolean>] [[-EnableSingleSignOn] <Boolean>] [[-WindowsSettings] <String>]
+ [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Updates a User Settings Policy in the Intune Cloud PC Service
+Update the Cloud PC organization settings.
+A tenant has only one cloudPcOrganizationSettings object.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```
-Update-CPCUserSettingsPolicy -Name "Your Settings Policy" -LocalAdminEnabled $true -UserRestoreEnabled $false -UserRestoreFrequency 6
+Update-CPCOrganizationSetting -osVersion windows10 -userAccountType administrator -enableMEMAutoEnroll $true -enableSingleSignOn $true
 ```
 
 ## PARAMETERS
 
-### -Name
-Name of the User Settings Policy to update
+### -OSVersion
+The account type of the user on provisioned Cloud PCs.
+The possible values are: standardUser, administrator
 
 ```yaml
 Type: String
 Parameter Sets: (All)
 Aliases:
 
-Required: True
-Position: Named
+Required: False
+Position: 1
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -LocalAdminEnabled
-Enable or disable local admin
+### -UserAccountType
+The account type of the user on provisioned Cloud PCs.
+The possible values are: standardUser, administrator
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 2
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -EnableMEMAutoEnroll
+Specifies whether new Cloud PCs will be automatically enrolled in Microsoft Intune.
+The default value is false.
 
 ```yaml
 Type: Boolean
@@ -54,14 +73,15 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: Named
+Position: 3
 Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ResetEnabled
-Allow targeted users to reprovision their Cloud PC from within the Windows 365 app and web app
+### -EnableSingleSignOn
+Specifies wether single sign-on is enabled for new Cloud PCs.
+The default value is false.
 
 ```yaml
 Type: Boolean
@@ -69,37 +89,22 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: Named
+Position: 4
 Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -UserRestoreEnabled
-Enable or disable user restore
+### -WindowsSettings
+{{ Fill WindowsSettings Description }}
 
 ```yaml
-Type: Boolean
+Type: String
 Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -UserRestoreFrequency
-Frequency of user restore points (4, 6, 12, 16, 24 hours)
-
-```yaml
-Type: Object
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
+Position: 5
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

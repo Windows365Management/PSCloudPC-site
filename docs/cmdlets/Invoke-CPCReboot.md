@@ -5,31 +5,31 @@ online version:
 schema: 2.0.0
 ---
 
-# Remove-CPCAzureNetworkConnection
+# Invoke-CPCReboot
 
 ## SYNOPSIS
-Removes a Cloud PC Azure Network Connection
+Reboots a CloudPC
 
 ## SYNTAX
 
 ```
-Remove-CPCAzureNetworkConnection [-Name] <String> [-ProgressAction <ActionPreference>] [<CommonParameters>]
+Invoke-CPCReboot [-Name] <String> [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-The function will remove a Cloud PC Azure Network Connection
+The function will reboot a CloudPC
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```
-Remove-CPCAzureNetworkConnection -name "Azure Network Connection 01"
+Invoke-CPCReboot -Name "CloudPC01"
 ```
 
 ## PARAMETERS
 
 ### -Name
-Enter the name of the Cloud PC Azure Network Connection
+Enter the name of the CloudPC
 
 ```yaml
 Type: String

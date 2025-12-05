@@ -5,31 +5,32 @@ online version:
 schema: 2.0.0
 ---
 
-# Remove-CPCAzureNetworkConnection
+# Export-CPCProvisioningPolicy
 
 ## SYNOPSIS
-Removes a Cloud PC Azure Network Connection
+Returns all Provisioning Policy's or Provisioning Policy's with a specific name
 
 ## SYNTAX
 
 ```
-Remove-CPCAzureNetworkConnection [-Name] <String> [-ProgressAction <ActionPreference>] [<CommonParameters>]
+Export-CPCProvisioningPolicy -Name <String> -OutputFolder <String> [-ProgressAction <ActionPreference>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-The function will remove a Cloud PC Azure Network Connection
+The function will return all Provisioning Policy's or Provisioning Policy's with a specific name
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```
-Remove-CPCAzureNetworkConnection -name "Azure Network Connection 01"
+Export-CPCProvisioningPolicy -name "ProvisioningPolicy01" -OutputFolder "C:\Temp"
 ```
 
 ## PARAMETERS
 
 ### -Name
-Enter the name of the Cloud PC Azure Network Connection
+Enter the name of the Provisioning Policy
 
 ```yaml
 Type: String
@@ -37,7 +38,22 @@ Parameter Sets: (All)
 Aliases:
 
 Required: True
-Position: 1
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -OutputFolder
+{{ Fill OutputFolder Description }}
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

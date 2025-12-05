@@ -5,43 +5,28 @@ online version:
 schema: 2.0.0
 ---
 
-# Remove-CPCAzureNetworkConnection
+# Get-CPCOrganizationSetting
 
 ## SYNOPSIS
-Removes a Cloud PC Azure Network Connection
+Returns the Cloud PC Organization Settings
 
 ## SYNTAX
 
 ```
-Remove-CPCAzureNetworkConnection [-Name] <String> [-ProgressAction <ActionPreference>] [<CommonParameters>]
+Get-CPCOrganizationSetting [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-The function will remove a Cloud PC Azure Network Connection
+This function will return all Cloud PC Organization Settings
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```
-Remove-CPCAzureNetworkConnection -name "Azure Network Connection 01"
+Get-CPCOrganizationSetting
 ```
 
 ## PARAMETERS
-
-### -Name
-Enter the name of the Cloud PC Azure Network Connection
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 1
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -ProgressAction
 {{ Fill ProgressAction Description }}

@@ -16,7 +16,8 @@ Adds a new Provisioning Policy
 ```
 New-CPCProvisioningPolicy -Name <String> [-Description <String>] [-ProvisioningType <String>]
  [-NamingTemplate <String>] [-ManagedBy <String>] [-ImageType <String>] -ImageId <String>
- -EnableSingleSignOn <Boolean> [-WindowsAutopatch <String>] [-Language <String>] [<CommonParameters>]
+ -EnableSingleSignOn <Boolean> [-WindowsAutopatch <String>] [-WindowsAutopatchGroupId <String>]
+ [-UserExperience <String>] [-Language <String>] [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ### AzureNetwork
@@ -24,7 +25,8 @@ New-CPCProvisioningPolicy -Name <String> [-Description <String>] [-ProvisioningT
 New-CPCProvisioningPolicy -Name <String> [-Description <String>] [-ProvisioningType <String>]
  [-NamingTemplate <String>] -DomainJoinType <String> -AzureNetworkConnection <Object> [-ManagedBy <String>]
  [-ImageType <String>] -ImageId <String> -EnableSingleSignOn <Boolean> [-WindowsAutopatch <String>]
- [-Language <String>] [<CommonParameters>]
+ [-WindowsAutopatchGroupId <String>] [-UserExperience <String>] [-Language <String>]
+ [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ### MicrosoftHosted
@@ -32,7 +34,8 @@ New-CPCProvisioningPolicy -Name <String> [-Description <String>] [-ProvisioningT
 New-CPCProvisioningPolicy -Name <String> [-Description <String>] [-ProvisioningType <String>]
  [-NamingTemplate <String>] -DomainJoinType <String> -RegionName <String> -RegionGroup <String>
  [-ManagedBy <String>] [-ImageType <String>] -ImageId <String> -EnableSingleSignOn <Boolean>
- [-WindowsAutopatch <String>] [-Language <String>] [<CommonParameters>]
+ [-WindowsAutopatch <String>] [-WindowsAutopatchGroupId <String>] [-UserExperience <String>]
+ [-Language <String>] [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -42,22 +45,27 @@ The function will add a new Provisioning Policy
 
 ### EXAMPLE 1
 ```
-New-CPCProvisioningPolicy -Name "Test-AzureADJoin" -Description "Test-AzureADJoin" -imageType "Gallery" -ImageId "MicrosoftWindowsDesktop_windows-ent-cpc_win11-22h2-ent-cpc-m365" -DomainJoinType "AzureADJoin" -EnableSingleSignOn $true -RegionName "westeurope" -RegionGroup "europeUnion" -Language "en-US"
+New-CPCProvisioningPolicy -Name "Test-AzureADJoin" -Description "Test-AzureADJoin" -imageType "Gallery" -ImageId "microsoftwindowsdesktop_windows-ent-cpc_win11-25h2-ent-cpc" -DomainJoinType "AzureADJoin" -EnableSingleSignOn $true -RegionName "westeurope" -RegionGroup "europeUnion" -Language "en-US"
 ```
 
 ### EXAMPLE 2
 ```
-New-CPCProvisioningPolicy -Name "Test-HybridADJoin" -Description "Test-HybridADJoin" -imageType "Gallery" -ImageId "MicrosoftWindowsDesktop_windows-ent-cpc_win11-22h2-ent-cpc-m365" -DomainJoinType "hybridAzureADJoin" -EnableSingleSignOn $false -AzureNetworkConnection "Azure Network Connection" -Language "en-US"
+New-CPCProvisioningPolicy -Name "Test-HybridADJoin" -Description "Test-HybridADJoin" -imageType "Gallery" -ImageId "microsoftwindowsdesktop_windows-ent-cpc_win11-25h2-ent-cpc" -DomainJoinType "hybridAzureADJoin" -EnableSingleSignOn $false -AzureNetworkConnection "Azure Network Connection" -Language "en-US"
 ```
 
 ### EXAMPLE 3
 ```
-New-CPCProvisioningPolicy -Name "Test-Autopatch" -Description "Test-Autopatch" -imageType "Gallery" -ImageId "MicrosoftWindowsDesktop_windows-ent-cpc_win11-22h2-ent-cpc-m365" -WindowsAutopatch "starterManaged" -DomainJoinType "AzureADJoin" -RegionName "westeurope" -RegionGroup "europeUnion" -Language "en-US" -EnableSingleSignOn $true
+New-CPCProvisioningPolicy -Name "Test-Autopatch" -Description "Test-Autopatch" -imageType "Gallery" -ImageId "microsoftwindowsdesktop_windows-ent-cpc_win11-25h2-ent-cpc" -WindowsAutopatch "starterManaged" -DomainJoinType "AzureADJoin" -RegionName "westeurope" -RegionGroup "europeUnion" -Language "en-US" -EnableSingleSignOn $true
 ```
 
 ### EXAMPLE 4
 ```
-New-CPCProvisioningPolicy -Name "Test-NamingTemplate" -Description "Test-NamingTemplate" -imageType "Gallery" -ImageId "MicrosoftWindowsDesktop_windows-ent-cpc_win11-22h2-ent-cpc-m365" -WindowsAutopatch "starterManaged" -DomainJoinType "AzureADJoin" -RegionName "westeurope" -RegionGroup "europeUnion" -Language "en-US" -EnableSingleSignOn $true -NamingTemplate "%USERNAME:5%-%RAND:5%"
+New-CPCProvisioningPolicy -Name "Test-NamingTemplate" -Description "Test-NamingTemplate" -imageType "Gallery" -ImageId "microsoftwindowsdesktop_windows-ent-cpc_win11-25h2-ent-cpc" -WindowsAutopatch "starterManaged" -DomainJoinType "AzureADJoin" -RegionName "westeurope" -RegionGroup "europeUnion" -Language "en-US" -EnableSingleSignOn $true -NamingTemplate "%USERNAME:5%-%RAND:5%"
+```
+
+### EXAMPLE 5
+```
+New-CPCProvisioningPolicy -Name "Test-CloudApps" -Description "Test-AzureADJoin" -imageType "Gallery" -ImageId "microsoftwindowsdesktop_windows-ent-cpc_win11-25h2-ent-cpc" -DomainJoinType "AzureADJoin" -EnableSingleSignOn $true -RegionName "northeurope" -RegionGroup "europeUnion" -Language "en-US" -ProvisioningType sharedByEntraGroup -userExperience cloudApp
 ```
 
 ## PARAMETERS
@@ -93,7 +101,7 @@ Accept wildcard characters: False
 ```
 
 ### -ProvisioningType
-Enter the Provisioning Type of the Provisioning Policy (dedicated or shared) (Default: dedicated)
+Enter the Provisioning Type of the Provisioning Policy (dedicated, sharedByUser or sharedByEntraGroup) (Default: dedicated)
 
 ```yaml
 Type: String
@@ -249,7 +257,7 @@ Accept wildcard characters: False
 ```
 
 ### -WindowsAutopatch
-{{ Fill WindowsAutopatch Description }}
+Enter the Windows Autopatch for the Provisioning Policy (notManaged or starterManaged) (Default: notManaged)
 
 ```yaml
 Type: String
@@ -259,6 +267,36 @@ Aliases:
 Required: False
 Position: Named
 Default value: NotManaged
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -WindowsAutopatchGroupId
+Enter the Windows Autopatch Group Id for the Provisioning Policy (Info: Get-CPCWindowsAutopatchGroup)
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -UserExperience
+Enter the User Experience for the Provisioning Policy (cloudPc or cloudApp) (Default: cloudPc)
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: CloudPc
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -274,6 +312,21 @@ Aliases:
 Required: False
 Position: Named
 Default value: En-US
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

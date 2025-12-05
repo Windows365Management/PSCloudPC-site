@@ -3,6 +3,11 @@ name: regenerateDocs
 on:
   schedule:
     - cron: "0 6 * * *"
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
 jobs:
   publish:
@@ -10,13 +15,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out PSCloudPC-site code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           repository: Windows365Management/PSCloudPC-site
           ref: main
           path: PSCloudPC-site
       - name: Check out PSCloudPC code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           repository: Windows365Management/PSCloudPC
           ref: develop
@@ -25,15 +30,15 @@ jobs:
         shell: pwsh
         run: |
           Install-Module -Name platyPS -Force
-          ls
       - name: Regenerate Docs
         shell: pwsh
         run: |
           Import-Module platyPS -Force
           Import-Module ./PSCloudPC/Src/PSCloudPC.psm1 -Force
-          New-MarkdownHelp -Module "PSCloudPC" -OutputFolder "./PSCloudPC-site/docs" -Force
+          New-MarkdownHelp -Module "PSCloudPC" -OutputFolder "./PSCloudPC-site/docs/cmdlets" -Force
       - name: Commit files
-        uses: stefanzweifel/git-auto-commit-action@v4
+        uses: stefanzweifel/git-auto-commit-action@v7
         with:
           commit_message: "Regenerated Docs"
-          branch: main
+          file_pattern: "docs/*"
+          repository: "./PSCloudPC-site"
