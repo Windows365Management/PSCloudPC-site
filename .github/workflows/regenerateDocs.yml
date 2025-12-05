@@ -37,8 +37,7 @@ jobs:
           Import-Module ./PSCloudPC/Src/PSCloudPC.psm1 -Force
           New-MarkdownHelp -Module "PSCloudPC" -OutputFolder "./PSCloudPC-site/docs" -Force
       - name: Commit files
-        uses: stefanzweifel/git-auto-commit-action@v4
+        uses: stefanzweifel/git-auto-commit-action@v7
         with:
           commit_message: "Regenerated Docs"
-          branch: main
           file_pattern: "docs/*"
