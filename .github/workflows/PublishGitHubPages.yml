@@ -35,6 +35,10 @@ jobs:
               pip install mkdocs-material mkdocs-material-extensions
               pip install mkdocs-include-dir-to-nav
               pip install pillow cairosvg
+          - name: Copy CNAME file to site directory
+            run: |
+              mkdir -p site
+              cp CNAME site/CNAME
           - name: Deploy
             working-directory: .
             run: mkdocs gh-deploy --force
