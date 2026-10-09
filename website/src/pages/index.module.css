@@ -510,7 +510,7 @@
   }
 
   .steps {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     gap: 2rem;
   }
 }
@@ -518,7 +518,7 @@
 @media screen and (max-width: 600px) {
   .featureGrid,
   .categoryGrid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .eyebrow {
@@ -531,6 +531,11 @@
 
   .buttons :global(.button) {
     flex: 1 1 100%;
+  }
+
+  .buttons :global(.button),
+  .centered :global(.button) {
+    white-space: normal;
   }
 
   .terminalBody {
