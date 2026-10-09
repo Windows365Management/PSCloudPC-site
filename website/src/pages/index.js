@@ -201,7 +201,6 @@ function Stats() {
   const stats = [
     { value: cmdlets.length, label: "cmdlets" },
     { value: "5", label: "authentication methods" },
-    { value: "3", label: "platforms: Windows, macOS, Linux" },
     { value: "MIT", label: "open-source licence" },
   ];
   return (
