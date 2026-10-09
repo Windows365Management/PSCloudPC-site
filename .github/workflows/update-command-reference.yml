@@ -1,0 +1,75 @@
+# Regenerates the cmdlet reference from the PSCloudPC module (develop branch)
+# and opens or updates a pull request when the generated pages change.
+#
+# Note: pull requests created with the default GITHUB_TOKEN do not trigger other
+# workflows, so the "Build website" check will not run on them automatically.
+# To get checks on these PRs, replace the token below with a GitHub App token
+# (actions/create-github-app-token) or a fine-grained PAT stored as a secret.
+name: Update command reference
+
+on:
+  schedule:
+    - cron: "0 6 * * *"
+  workflow_dispatch:
+  # Lets the module repository trigger a refresh, e.g. after a merge to develop:
+  # gh api repos/Windows365Management/PSCloudPC-site/dispatches -f event_type=module-updated
+  repository_dispatch:
+    types: [module-updated]
+
+permissions: {}
+
+concurrency:
+  group: update-command-reference
+  cancel-in-progress: false
+
+jobs:
+  update-command-reference:
+    name: Regenerate cmdlet reference
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Checkout PSCloudPC-site
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          path: PSCloudPC-site
+          persist-credentials: false
+
+      - name: Checkout PSCloudPC module (develop)
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: Windows365Management/PSCloudPC
+          ref: develop
+          path: PSCloudPC
+          persist-credentials: false
+
+      - name: Install module dependencies
+        shell: pwsh
+        run: |
+          Set-PSRepository PSGallery -InstallationPolicy Trusted
+          Install-Module Microsoft.Graph.Authentication -Scope CurrentUser -Force
+
+      - name: Generate command reference
+        shell: pwsh
+        run: ./PSCloudPC-site/build/Update-CommandReference.ps1 -ModulePath ./PSCloudPC/PSCloudPc/PSCloudPC.psd1
+
+      - name: Create or update pull request
+        uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8.1.1
+        with:
+          path: PSCloudPC-site
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: automation/update-command-reference
+          delete-branch: true
+          add-paths: website/docs/commands/**
+          commit-message: Update cmdlet reference from PSCloudPC develop
+          title: Update cmdlet reference from PSCloudPC develop
+          body: |
+            Regenerated `website/docs/commands` from the comment-based help on the
+            `develop` branch of [Windows365Management/PSCloudPC](https://github.com/Windows365Management/PSCloudPC)
+            using `build/Update-CommandReference.ps1`.
+
+            This pull request was created with the default `GITHUB_TOKEN`, so the
+            "Build website" check does not run automatically. Run it manually from the
+            Actions tab, or close and reopen this pull request, before merging.
+          labels: documentation
