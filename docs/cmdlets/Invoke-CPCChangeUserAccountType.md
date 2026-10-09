@@ -5,43 +5,61 @@ online version:
 schema: 2.0.0
 ---
 
-# Invoke-CPCReprovision
+# Invoke-CPCChangeUserAccountType
 
 ## SYNOPSIS
-Reprovision a Cloud PC
+Changes the local account type of the user on a Cloud PC
 
 ## SYNTAX
 
+### Name (Default)
 ```
-Invoke-CPCReprovision -Name <String> [-OsVersion <String>] [-UserAccountType <String>]
+Invoke-CPCChangeUserAccountType -Name <String> -UserAccountType <String> [-ProgressAction <ActionPreference>]
+ [-WhatIf] [-Confirm] [<CommonParameters>]
+```
+
+### Id
+```
+Invoke-CPCChangeUserAccountType -CloudPCId <String> -UserAccountType <String>
  [-ProgressAction <ActionPreference>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-The function will reprovision a Cloud PC using the Microsoft Graph v1.0 API.
-Optionally override the OS version (Windows 10 or 11) and the user account type
-(standard user or local administrator) for the reprovisioned Cloud PC.
+The function will change the user account type on a specific Cloud PC between
+standard user and local administrator using the Microsoft Graph beta API.
+Use this to elevate a user to local admin for troubleshooting or to demote
+an administrator back to a standard user for compliance reasons.
+
+You can identify the target Cloud PC by its managed device name (default) or
+by providing the Cloud PC object ID directly via -CloudPCId.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```
-Invoke-CPCReprovision -Name "CloudPC01"
+Invoke-CPCChangeUserAccountType -Name "CPC-User-XXXX" -UserAccountType administrator
 ```
 
 ### EXAMPLE 2
 ```
-Invoke-CPCReprovision -Name "CloudPC01" -OsVersion windows11 -UserAccountType standardUser
+Invoke-CPCChangeUserAccountType -CloudPCId "4b5ad5e0-6a0b-4ffc-818d-36bb23cf4dbd" -UserAccountType standardUser
+```
+
+### EXAMPLE 3
+```
+Invoke-CPCChangeUserAccountType -Name "CPC-User-XXXX" -UserAccountType administrator -WhatIf
 ```
 
 ## PARAMETERS
 
 ### -Name
-Enter the Cloud PC display name
+The managed device name of the Cloud PC.
+Use Get-CloudPC to find Cloud PC names.
+Mutually exclusive with -CloudPCId.
 
 ```yaml
 Type: String
-Parameter Sets: (All)
+Parameter Sets: Name
 Aliases:
 
 Required: True
@@ -51,18 +69,17 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -OsVersion
-Optional.
-The operating system version to provision.
-Valid values: 'windows10', 'windows11'.
-When omitted the tenant/policy default is used.
+### -CloudPCId
+The object ID (GUID) of the Cloud PC.
+Use Get-CloudPC to find Cloud PC IDs.
+Mutually exclusive with -Name.
 
 ```yaml
 Type: String
-Parameter Sets: (All)
+Parameter Sets: Id
 Aliases:
 
-Required: False
+Required: True
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -70,17 +87,15 @@ Accept wildcard characters: False
 ```
 
 ### -UserAccountType
-Optional.
-The local account type for the user on the reprovisioned Cloud PC.
+The account type to set for the user on the Cloud PC.
 Valid values: 'standardUser', 'administrator'.
-When omitted the tenant/policy default is used.
 
 ```yaml
 Type: String
 Parameter Sets: (All)
 Aliases:
 
-Required: False
+Required: True
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -141,6 +156,8 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## OUTPUTS
 
 ## NOTES
-API reference: https://learn.microsoft.com/en-us/graph/api/cloudpc-reprovision
+Requires CloudPC.ReadWrite.All permission (delegated or application).
+This action uses the Microsoft Graph beta endpoint.
+API reference: https://learn.microsoft.com/en-us/graph/api/cloudpc-changeuseraccounttype
 
 ## RELATED LINKS

@@ -5,39 +5,50 @@ online version:
 schema: 2.0.0
 ---
 
-# Invoke-CPCReprovision
+# Invoke-CPCCreateSnapshot
 
 ## SYNOPSIS
-Reprovision a Cloud PC
+Creates an on-demand snapshot for a Cloud PC
 
 ## SYNTAX
 
 ```
-Invoke-CPCReprovision -Name <String> [-OsVersion <String>] [-UserAccountType <String>]
+Invoke-CPCCreateSnapshot [-Name] <String> [[-StorageAccountId] <String>] [[-AccessTier] <String>]
  [-ProgressAction <ActionPreference>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-The function will reprovision a Cloud PC using the Microsoft Graph v1.0 API.
-Optionally override the OS version (Windows 10 or 11) and the user account type
-(standard user or local administrator) for the reprovisioned Cloud PC.
+The function triggers an on-demand snapshot (restore point) for a specific
+Cloud PC via the Microsoft Graph Windows 365 createSnapshot API (beta).
+This is useful for creating a checkpoint before risky changes such as
+software installs, OS upgrades, or configuration changes.
+
+Optionally, the snapshot can be exported to an Azure Blob Storage account
+by providing a StorageAccountId.
+When exporting, you can also specify the
+storage access tier (hot, cool, cold, archive).
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```
-Invoke-CPCReprovision -Name "CloudPC01"
+Invoke-CPCCreateSnapshot -Name "CloudPC01"
 ```
 
 ### EXAMPLE 2
 ```
-Invoke-CPCReprovision -Name "CloudPC01" -OsVersion windows11 -UserAccountType standardUser
+Invoke-CPCCreateSnapshot -Name "CloudPC01" -StorageAccountId "/subscriptions/xxx/resourceGroups/rg/providers/Microsoft.Storage/storageAccounts/myaccount"
+```
+
+### EXAMPLE 3
+```
+Invoke-CPCCreateSnapshot -Name "CloudPC01" -StorageAccountId "/subscriptions/xxx/resourceGroups/rg/providers/Microsoft.Storage/storageAccounts/myaccount" -AccessTier "cool"
 ```
 
 ## PARAMETERS
 
 ### -Name
-Enter the Cloud PC display name
+Enter the display name or managed device name of the Cloud PC
 
 ```yaml
 Type: String
@@ -45,17 +56,17 @@ Parameter Sets: (All)
 Aliases:
 
 Required: True
-Position: Named
+Position: 1
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -OsVersion
+### -StorageAccountId
 Optional.
-The operating system version to provision.
-Valid values: 'windows10', 'windows11'.
-When omitted the tenant/policy default is used.
+The resource ID of the Azure Storage Account to which the snapshot
+should be exported.
+If omitted, the snapshot is kept in the Windows 365 service.
 
 ```yaml
 Type: String
@@ -63,17 +74,18 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: Named
+Position: 2
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -UserAccountType
+### -AccessTier
 Optional.
-The local account type for the user on the reprovisioned Cloud PC.
-Valid values: 'standardUser', 'administrator'.
-When omitted the tenant/policy default is used.
+The blob access tier when exporting to a storage account.
+Valid values: hot, cool, cold, archive.
+Default: hot.
+Only used when StorageAccountId is provided.
 
 ```yaml
 Type: String
@@ -81,8 +93,8 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: Named
-Default value: None
+Position: 3
+Default value: Hot
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -141,6 +153,8 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## OUTPUTS
 
 ## NOTES
-API reference: https://learn.microsoft.com/en-us/graph/api/cloudpc-reprovision
+Requires CloudPC.ReadWrite.All permission (delegated or application).
+API reference: https://learn.microsoft.com/en-us/graph/api/cloudpc-createsnapshot?view=graph-rest-beta
+Note: This API is currently available in the /beta endpoint only.
 
 ## RELATED LINKS

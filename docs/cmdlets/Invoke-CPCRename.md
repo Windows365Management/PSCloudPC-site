@@ -5,33 +5,33 @@ online version:
 schema: 2.0.0
 ---
 
-# Get-CPCRestorePoint
+# Invoke-CPCRename
 
 ## SYNOPSIS
-Get all restore point snapshots for a Cloud PC.
+Renames a Cloud PC
 
 ## SYNTAX
 
 ```
-Get-CPCRestorePoint [-Name] <String> [-ProgressAction <ActionPreference>] [<CommonParameters>]
+Invoke-CPCRename [-Name] <String> [-NewDisplayName] <String> [-ProgressAction <ActionPreference>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Returns all available restore point snapshots for a given Cloud PC.
-Snapshots can be used with Invoke-CPCRestore to restore the Cloud PC to
-a previous state.
+The function will rename a Cloud PC by updating its displayName via the
+Microsoft Graph Windows 365 rename API (v1.0).
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```
-Get-CPCRestorePoint -Name "CloudPC01"
+Invoke-CPCRename -Name "CloudPC01" -NewDisplayName "Marketing-CloudPC-01"
 ```
 
 ## PARAMETERS
 
 ### -Name
-The display name of the Cloud PC.
+Enter the current name (managedDeviceName or displayName) of the Cloud PC to rename
 
 ```yaml
 Type: String
@@ -40,6 +40,21 @@ Aliases:
 
 Required: True
 Position: 1
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -NewDisplayName
+Enter the new display name to assign to the Cloud PC
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: 2
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -68,7 +83,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## OUTPUTS
 
 ## NOTES
-API reference: https://learn.microsoft.com/en-us/graph/api/cloudpc-retrievesnapshots
-Required permission: CloudPC.Read.All
+Requires CloudPC.ReadWrite.All permission (delegated or application).
+API reference: https://learn.microsoft.com/en-us/graph/api/cloudpc-rename
 
 ## RELATED LINKS

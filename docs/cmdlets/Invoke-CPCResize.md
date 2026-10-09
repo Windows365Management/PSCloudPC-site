@@ -5,39 +5,49 @@ online version:
 schema: 2.0.0
 ---
 
-# Invoke-CPCReprovision
+# Invoke-CPCResize
 
 ## SYNOPSIS
-Reprovision a Cloud PC
+Resizes a Cloud PC to a new service plan (vCPU and storage configuration)
 
 ## SYNTAX
 
+### ById (Default)
 ```
-Invoke-CPCReprovision -Name <String> [-OsVersion <String>] [-UserAccountType <String>]
- [-ProgressAction <ActionPreference>] [-WhatIf] [-Confirm] [<CommonParameters>]
+Invoke-CPCResize -Name <String> -ServicePlanId <String> [-ProgressAction <ActionPreference>] [-WhatIf]
+ [-Confirm] [<CommonParameters>]
+```
+
+### ByName
+```
+Invoke-CPCResize -Name <String> -ServicePlanName <String> [-ProgressAction <ActionPreference>] [-WhatIf]
+ [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-The function will reprovision a Cloud PC using the Microsoft Graph v1.0 API.
-Optionally override the OS version (Windows 10 or 11) and the user account type
-(standard user or local administrator) for the reprovisioned Cloud PC.
+The function upgrades or downgrades an existing Cloud PC to a configuration
+with a new virtual CPU (vCPU) and storage size by targeting a new service plan.
+The target service plan ID can be provided directly, or resolved by display name
+using the ServicePlanName parameter.
+Use Get-CPCServicePlan to discover available
+service plan IDs and their display names.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```
-Invoke-CPCReprovision -Name "CloudPC01"
+Invoke-CPCResize -Name "CloudPC01" -ServicePlanId "30d0e128-de93-41dc-89ec-33d84bb662a0"
 ```
 
 ### EXAMPLE 2
 ```
-Invoke-CPCReprovision -Name "CloudPC01" -OsVersion windows11 -UserAccountType standardUser
+Invoke-CPCResize -Name "CloudPC01" -ServicePlanName "Windows 365 Enterprise 4 vCPU, 16 GB, 256 GB"
 ```
 
 ## PARAMETERS
 
 ### -Name
-Enter the Cloud PC display name
+Enter the display name of the Cloud PC to resize
 
 ```yaml
 Type: String
@@ -51,36 +61,31 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -OsVersion
-Optional.
-The operating system version to provision.
-Valid values: 'windows10', 'windows11'.
-When omitted the tenant/policy default is used.
+### -ServicePlanId
+Enter the target service plan ID (GUID) to resize the Cloud PC to
 
 ```yaml
 Type: String
-Parameter Sets: (All)
+Parameter Sets: ById
 Aliases:
 
-Required: False
+Required: True
 Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -UserAccountType
-Optional.
-The local account type for the user on the reprovisioned Cloud PC.
-Valid values: 'standardUser', 'administrator'.
-When omitted the tenant/policy default is used.
+### -ServicePlanName
+Enter the display name of the target service plan to resize the Cloud PC to.
+The function will resolve the ID automatically using Get-CPCServicePlan.
 
 ```yaml
 Type: String
-Parameter Sets: (All)
+Parameter Sets: ByName
 Aliases:
 
-Required: False
+Required: True
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -141,6 +146,5 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## OUTPUTS
 
 ## NOTES
-API reference: https://learn.microsoft.com/en-us/graph/api/cloudpc-reprovision
 
 ## RELATED LINKS

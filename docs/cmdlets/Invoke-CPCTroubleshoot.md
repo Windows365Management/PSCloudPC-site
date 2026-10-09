@@ -5,39 +5,42 @@ online version:
 schema: 2.0.0
 ---
 
-# Invoke-CPCReprovision
+# Invoke-CPCTroubleshoot
 
 ## SYNOPSIS
-Reprovision a Cloud PC
+Triggers a troubleshoot action on a Cloud PC
 
 ## SYNTAX
 
 ```
-Invoke-CPCReprovision -Name <String> [-OsVersion <String>] [-UserAccountType <String>]
- [-ProgressAction <ActionPreference>] [-WhatIf] [-Confirm] [<CommonParameters>]
+Invoke-CPCTroubleshoot [-Name] <String> [-ProgressAction <ActionPreference>] [-WhatIf] [-Confirm]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-The function will reprovision a Cloud PC using the Microsoft Graph v1.0 API.
-Optionally override the OS version (Windows 10 or 11) and the user account type
-(standard user or local administrator) for the reprovisioned Cloud PC.
+The function triggers the troubleshoot action on a specific Cloud PC.
+This initiates a
+health check and session host inspection on the target Cloud PC, helping administrators
+diagnose connectivity, configuration, and health issues without reprovisioning.
+Use Get-CloudPC to find Cloud PC names.
+The action returns 204 No Content on success.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```
-Invoke-CPCReprovision -Name "CloudPC01"
+Invoke-CPCTroubleshoot -Name "CloudPC01"
 ```
 
 ### EXAMPLE 2
 ```
-Invoke-CPCReprovision -Name "CloudPC01" -OsVersion windows11 -UserAccountType standardUser
+Invoke-CPCTroubleshoot -Name "CloudPC01" -WhatIf
 ```
 
 ## PARAMETERS
 
 ### -Name
-Enter the Cloud PC display name
+Enter the display name of the Cloud PC to troubleshoot
 
 ```yaml
 Type: String
@@ -45,43 +48,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -OsVersion
-Optional.
-The operating system version to provision.
-Valid values: 'windows10', 'windows11'.
-When omitted the tenant/policy default is used.
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -UserAccountType
-Optional.
-The local account type for the user on the reprovisioned Cloud PC.
-Valid values: 'standardUser', 'administrator'.
-When omitted the tenant/policy default is used.
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
+Position: 1
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -141,6 +108,5 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## OUTPUTS
 
 ## NOTES
-API reference: https://learn.microsoft.com/en-us/graph/api/cloudpc-reprovision
 
 ## RELATED LINKS

@@ -14,18 +14,35 @@ Updates a User Settings Policy in the Intune Cloud PC Service
 
 ```
 Update-CPCUserSettingsPolicy -Name <String> [-LocalAdminEnabled <Boolean>] [-ResetEnabled <Boolean>]
- [-UserRestoreEnabled <Boolean>] [-UserRestoreFrequency <Object>] [-ProgressAction <ActionPreference>]
- [<CommonParameters>]
+ [-UserRestoreEnabled <Boolean>] [-UserRestoreFrequency <String>] [-DisableRestartPrompts <Boolean>]
+ [-SelfServiceEnabled <Boolean>] [-ProgressAction <ActionPreference>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Updates a User Settings Policy in the Intune Cloud PC Service
+Updates a User Settings Policy in the Intune Cloud PC Service.
+Supports updating
+LocalAdminEnabled, ResetEnabled, NotificationSetting, and restore point configuration.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```
-Update-CPCUserSettingsPolicy -Name "Your Settings Policy" -LocalAdminEnabled $true -UserRestoreEnabled $false -UserRestoreFrequency 6
+Update-CPCUserSettingsPolicy -Name "Your Settings Policy" -LocalAdminEnabled $true
+```
+
+### EXAMPLE 2
+```
+Update-CPCUserSettingsPolicy -Name "Your Settings Policy" -LocalAdminEnabled $false -ResetEnabled $true -UserRestoreEnabled $true -UserRestoreFrequency 6
+```
+
+### EXAMPLE 3
+```
+Update-CPCUserSettingsPolicy -Name "Your Settings Policy" -DisableRestartPrompts $true
+```
+
+### EXAMPLE 4
+```
+Update-CPCUserSettingsPolicy -Name "Your Settings Policy" -SelfServiceEnabled $true
 ```
 
 ## PARAMETERS
@@ -46,7 +63,8 @@ Accept wildcard characters: False
 ```
 
 ### -LocalAdminEnabled
-Enable or disable local admin
+Enable or disable local admin on the Cloud PC.
+When $true the end user is an admin of the Cloud PC.
 
 ```yaml
 Type: Boolean
@@ -61,7 +79,7 @@ Accept wildcard characters: False
 ```
 
 ### -ResetEnabled
-Allow targeted users to reprovision their Cloud PC from within the Windows 365 app and web app
+Allow targeted users to reprovision their Cloud PC from within the Windows 365 app and web app.
 
 ```yaml
 Type: Boolean
@@ -76,7 +94,7 @@ Accept wildcard characters: False
 ```
 
 ### -UserRestoreEnabled
-Enable or disable user restore
+Enable or disable user-initiated restore from the Cloud PC restore point.
 
 ```yaml
 Type: Boolean
@@ -91,12 +109,77 @@ Accept wildcard characters: False
 ```
 
 ### -UserRestoreFrequency
-Frequency of user restore points (4, 6, 12, 16, 24 hours)
+Frequency (in hours) at which restore point snapshots are captured.
+Valid values: 4, 6, 12, 16, 24.
 
 ```yaml
-Type: Object
+Type: String
 Parameter Sets: (All)
 Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -DisableRestartPrompts
+When $true, disables the restart prompts shown to the user on the Cloud PC (notificationSetting).
+
+```yaml
+Type: Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -SelfServiceEnabled
+Allow or prevent targeted users from performing self-service actions (e.g.
+upgrading their Cloud PC)
+from within the Windows 365 app.
+Uses the Graph beta selfServiceEnabled property.
+
+```yaml
+Type: Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -WhatIf
+Shows what would happen if the cmdlet runs.
+The cmdlet is not run.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases: wi
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Confirm
+Prompts you for confirmation before running the cmdlet.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases: cf
 
 Required: False
 Position: Named
@@ -128,5 +211,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## OUTPUTS
 
 ## NOTES
+API reference: https://learn.microsoft.com/en-us/graph/api/cloudpcusersetting-update
 
 ## RELATED LINKS

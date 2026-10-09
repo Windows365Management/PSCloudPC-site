@@ -5,43 +5,65 @@ online version:
 schema: 2.0.0
 ---
 
-# Invoke-CPCReprovision
+# Invoke-CPCPowerOn
 
 ## SYNOPSIS
-Reprovision a Cloud PC
+Powers on a Windows 365 Frontline Cloud PC
 
 ## SYNTAX
 
+### Name (Default)
 ```
-Invoke-CPCReprovision -Name <String> [-OsVersion <String>] [-UserAccountType <String>]
- [-ProgressAction <ActionPreference>] [-WhatIf] [-Confirm] [<CommonParameters>]
+Invoke-CPCPowerOn -Name <String> [-ProgressAction <ActionPreference>] [-WhatIf] [-Confirm] [<CommonParameters>]
+```
+
+### Id
+```
+Invoke-CPCPowerOn -CloudPCId <String> [-ProgressAction <ActionPreference>] [-WhatIf] [-Confirm]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-The function will reprovision a Cloud PC using the Microsoft Graph v1.0 API.
-Optionally override the OS version (Windows 10 or 11) and the user account type
-(standard user or local administrator) for the reprovisioned Cloud PC.
+The function powers on a specific Windows 365 Frontline Cloud PC via the
+Microsoft Graph beta API.
+After the Cloud PC is powered on, it is allocated
+to a user and licenses are assigned immediately.
+
+You can identify the target Cloud PC by its managed device name (default) or
+by providing the Cloud PC object ID directly via -CloudPCId.
+
+Note: This action applies to Windows 365 Frontline Cloud PCs only.
+Only IT admin users can perform this action.
+Returns 204 No Content on success.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```
-Invoke-CPCReprovision -Name "CloudPC01"
+Invoke-CPCPowerOn -Name "CPC-User-XXXX"
 ```
 
 ### EXAMPLE 2
 ```
-Invoke-CPCReprovision -Name "CloudPC01" -OsVersion windows11 -UserAccountType standardUser
+Invoke-CPCPowerOn -CloudPCId "4b5ad5e0-6a0b-4ffc-818d-36bb23cf4dbd"
+```
+
+### EXAMPLE 3
+```
+Invoke-CPCPowerOn -Name "CPC-User-XXXX" -WhatIf
 ```
 
 ## PARAMETERS
 
 ### -Name
-Enter the Cloud PC display name
+The managed device name of the Cloud PC to power on.
+Use Get-CloudPC to find
+Cloud PC names.
+Mutually exclusive with -CloudPCId.
 
 ```yaml
 Type: String
-Parameter Sets: (All)
+Parameter Sets: Name
 Aliases:
 
 Required: True
@@ -51,36 +73,18 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -OsVersion
-Optional.
-The operating system version to provision.
-Valid values: 'windows10', 'windows11'.
-When omitted the tenant/policy default is used.
+### -CloudPCId
+The object ID (GUID) of the Cloud PC to power on.
+Use Get-CloudPC to find
+Cloud PC IDs.
+Mutually exclusive with -Name.
 
 ```yaml
 Type: String
-Parameter Sets: (All)
+Parameter Sets: Id
 Aliases:
 
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -UserAccountType
-Optional.
-The local account type for the user on the reprovisioned Cloud PC.
-Valid values: 'standardUser', 'administrator'.
-When omitted the tenant/policy default is used.
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
+Required: True
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -141,6 +145,8 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## OUTPUTS
 
 ## NOTES
-API reference: https://learn.microsoft.com/en-us/graph/api/cloudpc-reprovision
+Requires CloudPC.ReadWrite.All permission (delegated or application).
+This action uses the Microsoft Graph beta endpoint.
+API reference: https://learn.microsoft.com/en-us/graph/api/cloudpc-poweron
 
 ## RELATED LINKS
