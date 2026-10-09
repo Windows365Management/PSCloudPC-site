@@ -483,7 +483,7 @@
   }
 
   .heroInner {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     gap: 2.5rem;
   }
 
@@ -519,6 +519,30 @@
   .featureGrid,
   .categoryGrid {
     grid-template-columns: 1fr;
+  }
+
+  .eyebrow {
+    font-size: 0.78rem;
+  }
+
+  .heroSubtitle {
+    font-size: 1.05rem;
+  }
+
+  .buttons :global(.button) {
+    flex: 1 1 100%;
+  }
+
+  .terminalBody {
+    font-size: 0.72rem;
+  }
+
+  .stat {
+    padding: 1.1rem 0.75rem;
+  }
+
+  .statValue {
+    font-size: 1.7rem;
   }
 
   .section {

@@ -115,8 +115,8 @@
 }
 
 .markdown table {
-  display: table;
-  width: 100%;
+  display: block;
+  overflow-x: auto;
   border-collapse: separate;
   border-spacing: 0;
   overflow: hidden;
@@ -194,4 +194,27 @@
   display: flex;
   gap: 0.5rem;
   justify-content: flex-end;
+}
+
+/* Full-width tables on larger screens; on phones they keep scrolling sideways */
+@media screen and (min-width: 997px) {
+  .markdown table {
+    display: table;
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .cookie-consent {
+    left: 0.5rem;
+    right: 0.5rem;
+    bottom: 0.5rem;
+    padding: 0.75rem 0.9rem;
+  }
+
+  .cookie-consent p {
+    margin-bottom: 0.5rem;
+    font-size: 0.78rem;
+    line-height: 1.45;
+  }
 }
