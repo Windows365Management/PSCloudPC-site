@@ -15,6 +15,11 @@ const config = {
 
   future: {
     v4: true, // Improve compatibility with the upcoming Docusaurus v4
+    faster: {
+      // The SWC HTML minifier strips attribute quotes, which stops LinkedIn
+      // from reading the Open Graph tags; use the default minifier instead.
+      swcHtmlMinimizer: false,
+    },
   },
 
   url: "https://pscloudpc.com",
