@@ -72,8 +72,14 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
-      image: "img/logo.png",
+      image: "img/social-card.png",
       metadata: [
+        { property: "og:site_name", content: "PSCloudPC" },
+        { property: "og:type", content: "website" },
+        { property: "og:image:width", content: "1200" },
+        { property: "og:image:height", content: "630" },
+        { property: "og:image:alt", content: "PSCloudPC: manage Windows 365 from PowerShell" },
+        { name: "twitter:image:alt", content: "PSCloudPC: manage Windows 365 from PowerShell" },
         {
           name: "keywords",
           content: "PSCloudPC, Windows 365, Cloud PC, PowerShell, Microsoft Graph, Intune",
