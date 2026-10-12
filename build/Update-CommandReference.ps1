@@ -84,9 +84,12 @@ Get-Module PSCloudPC | Remove-Module -Force
 $module = Import-Module $ModulePath -Force -PassThru
 Write-Host "Generating command reference for $($module.Name) $($module.Version) from $ModulePath"
 
-# Generate the .mdx files and docusaurus.sidebar.js (this cleans the commands folder first)
+# Generate the .mdx files and docusaurus.sidebar.js (this cleans the commands folder first).
+# Pass the manifest path, not the module name: Alt3 runs Test-Path on -Module and, when a
+# folder with the module name exists in the current directory (as in CI), re-imports it
+# by name from PSModulePath, which fails.
 $docusaurusHelpParams = @{
-    Module                = $module.Name
+    Module                = $ModulePath
     DocsFolder            = $docsFolder
     Sidebar               = 'commands'
     EditUrl               = $EditUrlBase
