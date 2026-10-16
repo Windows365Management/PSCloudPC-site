@@ -20,12 +20,20 @@ Removes a Cloud PC User Settings Policy
 ## SYNTAX
 
 ```powershell
-Remove-CPCUserSettingsPolicy [-Name] <String> [-ProgressAction <ActionPreference>] [<CommonParameters>]
+Remove-CPCUserSettingsPolicy [-Name] <String> [-ProgressAction <ActionPreference>] [-WhatIf] [-Confirm]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
 
-The function will remove a Cloud PC User Settings Policy
+The function will remove a Cloud PC User Settings Policy.
+The name must match the display name of exactly one policy (exact match, not case sensitive).
+If no policy or more than one policy has that name, nothing is removed and the command stops.
+Graph allows more than one User Settings Policy with the same name; rename one of them first if that happens.
+The function asks for confirmation before it removes the policy.
+In a non-interactive session
+(pwsh -File, a pipeline or a scheduled task) the confirmation prompt fails and nothing is removed,
+so pass -Confirm:$false there.
 
 ## EXAMPLES
 
@@ -34,6 +42,20 @@ The function will remove a Cloud PC User Settings Policy
 ```powershell
 Remove-CPCUserSettingsPolicy -name "User Settings Policy 01"
 ```
+
+### EXAMPLE 2
+
+```powershell
+Remove-CPCUserSettingsPolicy -name "User Settings Policy 01" -WhatIf
+```
+
+### EXAMPLE 3
+
+```powershell
+Remove-CPCUserSettingsPolicy -name "User Settings Policy 01" -Confirm:$false
+```
+
+Removes the policy without asking for confirmation, as needed in scripts and pipelines.
 
 ## PARAMETERS
 
@@ -48,6 +70,39 @@ Aliases:
 
 Required: True
 Position: 1
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -WhatIf
+
+Shows what would happen if the cmdlet runs.
+The cmdlet is not run.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases: wi
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Confirm
+
+Prompts you for confirmation before running the cmdlet.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases: cf
+
+Required: False
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -78,5 +133,9 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## OUTPUTS
 
 ## NOTES
+
+Required permission: CloudPC.ReadWrite.All
+https://learn.microsoft.com/graph/api/cloudpcusersetting-delete?view=graph-rest-beta
+https://learn.microsoft.com/graph/api/virtualendpoint-list-usersettings?view=graph-rest-beta
 
 ## RELATED LINKS

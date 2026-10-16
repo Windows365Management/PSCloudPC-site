@@ -20,12 +20,21 @@ Removes a Cloud PC Custom Image
 ## SYNTAX
 
 ```powershell
-Remove-CPCCustomImage [-Name] <String> [-ProgressAction <ActionPreference>] [<CommonParameters>]
+Remove-CPCCustomImage [-Name] <String> [[-Version] <String>] [-ProgressAction <ActionPreference>] [-WhatIf]
+ [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
 
-The function will remove a Cloud PC Custom Image
+The function will remove a Cloud PC Custom Image.
+The name must match the display name of exactly one image (exact match, not case sensitive).
+Several versions of an image can share a display name; use -Version to select one of them.
+If no image or more than one image matches, nothing is removed and the command stops; the
+message lists the id and version of every match.
+The function asks for confirmation before it removes the image.
+In a non-interactive session
+(pwsh -File, a pipeline or a scheduled task) the confirmation prompt fails and nothing is removed,
+so pass -Confirm:$false there.
 
 ## EXAMPLES
 
@@ -34,6 +43,26 @@ The function will remove a Cloud PC Custom Image
 ```powershell
 Remove-CPCCustomImage -name "Custom Image 01"
 ```
+
+### EXAMPLE 2
+
+```powershell
+Remove-CPCCustomImage -name "Custom Image 01" -Version "1.0.0"
+```
+
+### EXAMPLE 3
+
+```powershell
+Remove-CPCCustomImage -name "Custom Image 01" -WhatIf
+```
+
+### EXAMPLE 4
+
+```powershell
+Remove-CPCCustomImage -name "Custom Image 01" -Version "1.0.0" -Confirm:$false
+```
+
+Removes the image without asking for confirmation, as needed in scripts and pipelines.
 
 ## PARAMETERS
 
@@ -48,6 +77,57 @@ Aliases:
 
 Required: True
 Position: 1
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Version
+
+Enter the version of the Cloud PC Custom Image (for example "1.0.0").
+Optional; only needed when
+more than one image has the same name.
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 2
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -WhatIf
+
+Shows what would happen if the cmdlet runs.
+The cmdlet is not run.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases: wi
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Confirm
+
+Prompts you for confirmation before running the cmdlet.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases: cf
+
+Required: False
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -78,5 +158,10 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## OUTPUTS
 
 ## NOTES
+
+Required permission: CloudPC.ReadWrite.All
+https://learn.microsoft.com/graph/api/cloudpcdeviceimage-delete?view=graph-rest-beta
+https://learn.microsoft.com/graph/api/virtualendpoint-list-deviceimages?view=graph-rest-beta
+https://learn.microsoft.com/graph/api/resources/cloudpcdeviceimage?view=graph-rest-beta
 
 ## RELATED LINKS

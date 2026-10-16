@@ -40,6 +40,22 @@ Supported disaster recovery types:
 - premium       : Premium DR - adds user-initiated failover capability on top of
                   cross-region standby
 
+Only the crossRegionDisasterRecoverySetting of the policy is changed, and within it only
+what you pass: -MaintainCrossRegionRestorePointEnabled and -UserInitiatedDisasterRecoveryAllowed
+keep their current value when they are not passed.
+Graph replaces the
+whole policy on an update, so the cmdlet reads the current policy and sends all other
+settings (local admin, reset, restore point settings and so on) back unchanged.
+Changes
+someone else makes to the policy between that read and the update are overwritten.
+The
+deprecated restorePointSetting frequencyInHours and the retired selfServiceEnabled and
+notificationSetting are never sent.
+
+crossRegionDisasterRecoveryEnabled is deprecated in the Graph docs, but Graph still rejects
+a crossRegion setting without it, so it is sent as $true for crossRegion and premium and as
+$false for notConfigured.
+
 This function requires the Graph API beta endpoint and the CloudPC.ReadWrite.All permission.
 
 ## EXAMPLES
@@ -53,7 +69,7 @@ Set-CPCCrossRegionDisasterRecovery -Name "UserSettings01" -DisasterRecoveryType 
 ### EXAMPLE 2
 
 ```powershell
-Set-CPCCrossRegionDisasterRecovery -Name "UserSettings01" -DisasterRecoveryType premium -RegionName "northeurope" -RegionGroup "europeNorth" -MaintainCrossRegionRestorePointEnabled $true -UserInitiatedDisasterRecoveryAllowed $true
+Set-CPCCrossRegionDisasterRecovery -Name "UserSettings01" -DisasterRecoveryType premium -RegionName "northeurope" -RegionGroup "europeUnion" -MaintainCrossRegionRestorePointEnabled $true -UserInitiatedDisasterRecoveryAllowed $true
 ```
 
 ### EXAMPLE 3
@@ -66,7 +82,9 @@ Set-CPCCrossRegionDisasterRecovery -Name "UserSettings01" -DisasterRecoveryType 
 
 ### -Name
 
-The display name of the Cloud PC User Settings Policy to update.
+The exact display name of the Cloud PC User Settings Policy to update.
+The name must match
+exactly one policy.
 
 ```yaml
 Type: String
@@ -101,8 +119,10 @@ Accept wildcard characters: False
 
 When $true, Windows 365 continuously maintains cross-region restore points that can be
 used during failover.
-When $false (default), only the initial provisioning image is
-available after a disaster, which may result in data loss.
+When $false, only the initial provisioning image is available
+after a disaster, which may result in data loss.
+When not passed, the current value of
+the policy is kept (Graph's default for a new setting is $false).
 
 ```yaml
 Type: Boolean
@@ -120,8 +140,10 @@ Accept wildcard characters: False
 
 When $true, end users can activate disaster recovery themselves from the Windows 365
 portal.
-Only applicable when DisasterRecoveryType is 'premium'.
-Default is $false.
+Only applicable when DisasterRecoveryType is 'premium'; for the other types it is
+always sent as $false.
+When not passed with premium, the current value of the policy is
+kept (Graph's default for a new setting is $false).
 
 ```yaml
 Type: Boolean
@@ -157,11 +179,14 @@ Accept wildcard characters: False
 
 ### -RegionGroup
 
-The region group for disaster recovery routing (e.g.
-'usEast', 'usWest',
-'europeNorth', 'europeWest', 'asiaPacific').
+The cloudPcRegionGroup that the disaster recovery region belongs to (e.g.
+'usEast',
+'usWest', 'europeUnion', 'unitedKingdom', 'asia').
 Required when DisasterRecoveryType is
 'crossRegion' or 'premium'.
+The value is passed to Graph as is, so region groups that
+Microsoft adds later work without a module update; Graph rejects an unknown value.
+See https://learn.microsoft.com/graph/api/resources/cloudpcregiongroup?view=graph-rest-beta
 
 ```yaml
 Type: String
@@ -233,5 +258,12 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## OUTPUTS
 
 ## NOTES
+
+Required permission: CloudPC.ReadWrite.All
+https://learn.microsoft.com/graph/api/cloudpcusersetting-update?view=graph-rest-beta
+https://learn.microsoft.com/graph/api/cloudpcusersetting-get?view=graph-rest-beta
+https://learn.microsoft.com/graph/api/resources/cloudpccrossregiondisasterrecoverysetting?view=graph-rest-beta
+https://learn.microsoft.com/graph/api/resources/cloudpcregiongroup?view=graph-rest-beta
+https://learn.microsoft.com/graph/api/resources/cloudpcrestorepointsetting?view=graph-rest-beta
 
 ## RELATED LINKS

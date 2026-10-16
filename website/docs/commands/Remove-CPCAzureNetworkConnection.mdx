@@ -20,12 +20,20 @@ Removes a Cloud PC Azure Network Connection
 ## SYNTAX
 
 ```powershell
-Remove-CPCAzureNetworkConnection [-Name] <String> [-ProgressAction <ActionPreference>] [<CommonParameters>]
+Remove-CPCAzureNetworkConnection [-Name] <String> [-ProgressAction <ActionPreference>] [-WhatIf] [-Confirm]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
 
-The function will remove a Cloud PC Azure Network Connection
+The function will remove a Cloud PC Azure Network Connection.
+The name must match the display name of exactly one connection (exact match, not case sensitive).
+If no connection or more than one connection has that name, nothing is removed and the command stops.
+You can't delete an Azure Network Connection that's in use.
+The function asks for confirmation before it removes the connection.
+In a non-interactive session
+(pwsh -File, a pipeline or a scheduled task) the confirmation prompt fails and nothing is removed,
+so pass -Confirm:$false there.
 
 ## EXAMPLES
 
@@ -34,6 +42,20 @@ The function will remove a Cloud PC Azure Network Connection
 ```powershell
 Remove-CPCAzureNetworkConnection -name "Azure Network Connection 01"
 ```
+
+### EXAMPLE 2
+
+```powershell
+Remove-CPCAzureNetworkConnection -name "Azure Network Connection 01" -WhatIf
+```
+
+### EXAMPLE 3
+
+```powershell
+Remove-CPCAzureNetworkConnection -name "Azure Network Connection 01" -Confirm:$false
+```
+
+Removes the connection without asking for confirmation, as needed in scripts and pipelines.
 
 ## PARAMETERS
 
@@ -48,6 +70,39 @@ Aliases:
 
 Required: True
 Position: 1
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -WhatIf
+
+Shows what would happen if the cmdlet runs.
+The cmdlet is not run.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases: wi
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Confirm
+
+Prompts you for confirmation before running the cmdlet.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases: cf
+
+Required: False
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -78,5 +133,9 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## OUTPUTS
 
 ## NOTES
+
+Required permission: CloudPC.ReadWrite.All (delegated only; Graph doesn't support application permissions for this delete)
+https://learn.microsoft.com/graph/api/cloudpconpremisesconnection-delete?view=graph-rest-beta
+https://learn.microsoft.com/graph/api/virtualendpoint-list-onpremisesconnections?view=graph-rest-beta
 
 ## RELATED LINKS
