@@ -94,6 +94,8 @@ Accept wildcard characters: False
 
 Enter the display name of the target service plan to resize the Cloud PC to.
 The function will resolve the ID automatically using Get-CPCServicePlan.
+The name must
+match exactly one service plan; otherwise no request is sent.
 
 ```yaml
 Type: String
@@ -165,5 +167,8 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## OUTPUTS
 
 ## NOTES
+
+Required permission: CloudPC.ReadWrite.All
+https://learn.microsoft.com/graph/api/cloudpc-resize?view=graph-rest-beta
 
 ## RELATED LINKS

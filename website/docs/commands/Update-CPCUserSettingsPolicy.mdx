@@ -29,7 +29,18 @@ Update-CPCUserSettingsPolicy -Name <String> [-LocalAdminEnabled <Boolean>] [-Res
 
 Updates a User Settings Policy in the Intune Cloud PC Service.
 Supports updating
-LocalAdminEnabled, ResetEnabled, NotificationSetting, and restore point configuration.
+LocalAdminEnabled, ResetEnabled and the restore point configuration.
+
+Graph replaces the whole policy on an update, so the cmdlet reads the current policy and sends
+every setting back: only the parameters you pass are changed, all other settings (including the
+cross-region disaster recovery settings) are kept.
+Changes someone else makes to the policy
+between that read and the update are overwritten.
+The cmdlet returns no output.
+
+The self-service and restart prompt settings were retired by Microsoft.
+-SelfServiceEnabled and
+-DisableRestartPrompts only write a warning and are not sent.
 
 ## EXAMPLES
 
@@ -48,20 +59,15 @@ Update-CPCUserSettingsPolicy -Name "Your Settings Policy" -LocalAdminEnabled $fa
 ### EXAMPLE 3
 
 ```powershell
-Update-CPCUserSettingsPolicy -Name "Your Settings Policy" -DisableRestartPrompts $true
-```
-
-### EXAMPLE 4
-
-```powershell
-Update-CPCUserSettingsPolicy -Name "Your Settings Policy" -SelfServiceEnabled $true
+Update-CPCUserSettingsPolicy -Name "Your Settings Policy" -UserRestoreFrequency 4
 ```
 
 ## PARAMETERS
 
 ### -Name
 
-Name of the User Settings Policy to update
+Name of the User Settings Policy to update.
+The name must match exactly one policy.
 
 ```yaml
 Type: String
@@ -128,6 +134,7 @@ Accept wildcard characters: False
 
 Frequency (in hours) at which restore point snapshots are captured.
 Valid values: 4, 6, 12, 16, 24.
+Sent as the restorePointSetting frequencyType (fourHours, sixHours, twelveHours, sixteenHours, twentyFourHours).
 
 ```yaml
 Type: String
@@ -143,7 +150,9 @@ Accept wildcard characters: False
 
 ### -DisableRestartPrompts
 
-When $true, disables the restart prompts shown to the user on the Cloud PC (notificationSetting).
+Retired: has no effect and writes a warning.
+Microsoft retired the notificationSetting
+(restartPromptsDisabled) of User Settings Policies on July 14, 2026.
 
 ```yaml
 Type: Boolean
@@ -159,10 +168,9 @@ Accept wildcard characters: False
 
 ### -SelfServiceEnabled
 
-Allow or prevent targeted users from performing self-service actions (e.g.
-upgrading their Cloud PC)
-from within the Windows 365 app.
-Uses the Graph beta selfServiceEnabled property.
+Retired: has no effect and writes a warning.
+Microsoft retired the selfServiceEnabled setting
+of User Settings Policies on December 1, 2023.
 
 ```yaml
 Type: Boolean
@@ -235,6 +243,10 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## NOTES
 
-API reference: https://learn.microsoft.com/en-us/graph/api/cloudpcusersetting-update
+Required permission: CloudPC.ReadWrite.All
+https://learn.microsoft.com/graph/api/cloudpcusersetting-update?view=graph-rest-beta
+https://learn.microsoft.com/graph/api/cloudpcusersetting-get?view=graph-rest-beta
+https://learn.microsoft.com/graph/api/resources/cloudpcusersetting?view=graph-rest-beta
+https://learn.microsoft.com/graph/api/resources/cloudpcrestorepointsetting?view=graph-rest-beta
 
 ## RELATED LINKS

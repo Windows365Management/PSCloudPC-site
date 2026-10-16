@@ -1,5 +1,5 @@
 ---
-description: "Adds a new Provisioning Policy"
+description: "Adds a new Azure Network Connection"
 id: New-CPCAzureNetworkConnection
 title: New-CPCAzureNetworkConnection
 keywords:
@@ -15,21 +15,21 @@ custom_edit_url: https://github.com/Windows365Management/PSCloudPC/blob/develop/
 
 ## SYNOPSIS
 
-Adds a new Provisioning Policy
+Adds a new Azure Network Connection
 
 ## SYNTAX
 
 ### AzureADJoin (Default)
 
 ```powershell
-New-CPCAzureNetworkConnection -DisplayName <String> -ResourceGroupId <String> -VirtualNetworkId <String>
+New-CPCAzureNetworkConnection -Name <String> -ResourceGroupId <String> -VirtualNetworkId <String>
  -SubnetId <String> -SubscriptionId <String> [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ### HybridAzureADJoin
 
 ```powershell
-New-CPCAzureNetworkConnection -DisplayName <String> -ResourceGroupId <String> -VirtualNetworkId <String>
+New-CPCAzureNetworkConnection -Name <String> -ResourceGroupId <String> -VirtualNetworkId <String>
  -SubnetId <String> -SubscriptionId <String> -AdDomainName <String> -AdDomainUserName <String>
  -AdDomainPassword <SecureString> -OrganizationalUnit <String> [-ProgressAction <ActionPreference>]
  [<CommonParameters>]
@@ -37,32 +37,32 @@ New-CPCAzureNetworkConnection -DisplayName <String> -ResourceGroupId <String> -V
 
 ## DESCRIPTION
 
-The function will add a new Provisioning Policy
+The function will add a new Azure Network Connection
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 
 ```powershell
-New-CPCAzureNetworkConnection -name "AzureADJoin" -resourceGroupId "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/ResourceGroup01" -VirtualNetworkId "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/ResourceGroup01/providers/Microsoft.Network/virtualNetworks/VirtualNetwork01" -subnetId "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/ResourceGroup01/providers/Microsoft.Network/virtualNetworks/VirtualNetwork01/subnets/Subnet01" -subscriptionId "00000000-0000-0000-0000-000000000000"
+New-CPCAzureNetworkConnection -Name "AzureADJoin" -resourceGroupId "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/ResourceGroup01" -VirtualNetworkId "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/ResourceGroup01/providers/Microsoft.Network/virtualNetworks/VirtualNetwork01" -subnetId "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/ResourceGroup01/providers/Microsoft.Network/virtualNetworks/VirtualNetwork01/subnets/Subnet01" -subscriptionId "00000000-0000-0000-0000-000000000000"
 ```
 
 ### EXAMPLE 2
 
 ```powershell
-New-CPCAzureNetworkConnection -name "HybridAzureADJoin" -resourceGroupId "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/ResourceGroup01" -VirtualNetworkId "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/ResourceGroup01/providers/Microsoft.Network/virtualNetworks/VirtualNetwork01" -subnetId "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/ResourceGroup01/providers/Microsoft.Network/virtualNetworks/VirtualNetwork01/subnets/Subnet01" -subscriptionId "00000000-0000-0000-0000-000000000000" -AdDomainName "contoso.com" -AdDomainUserName "admin@contoso.com" -AdDomainPassword "Password01" -OrganizationalUnit "OU=OUName,DC=DomainName,DC=com"
+New-CPCAzureNetworkConnection -Name "HybridAzureADJoin" -resourceGroupId "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/ResourceGroup01" -VirtualNetworkId "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/ResourceGroup01/providers/Microsoft.Network/virtualNetworks/VirtualNetwork01" -subnetId "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/ResourceGroup01/providers/Microsoft.Network/virtualNetworks/VirtualNetwork01/subnets/Subnet01" -subscriptionId "00000000-0000-0000-0000-000000000000" -AdDomainName "contoso.com" -AdDomainUserName "admin@contoso.com" -AdDomainPassword (Read-Host -AsSecureString) -OrganizationalUnit "OU=OUName,DC=DomainName,DC=com"
 ```
 
 ## PARAMETERS
 
-### -DisplayName
+### -Name
 
-_No description available._
+Enter the name of the Azure Network Connection
 
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: DisplayName
 
 Required: True
 Position: Named

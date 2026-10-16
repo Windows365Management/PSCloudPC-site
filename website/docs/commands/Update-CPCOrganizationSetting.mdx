@@ -42,8 +42,8 @@ Update-CPCOrganizationSetting -osVersion windows10 -userAccountType administrato
 
 ### -OSVersion
 
-The account type of the user on provisioned Cloud PCs.
-The possible values are: standardUser, administrator
+The version of the operating system (OS) to provision on Cloud PCs.
+The possible values are: windows10, windows11
 
 ```yaml
 Type: String
@@ -110,7 +110,8 @@ Accept wildcard characters: False
 
 ### -WindowsSettings
 
-_No description available._
+The Windows language for new Cloud PCs, for example en-US.
+The default value is en-US.
 
 ```yaml
 Type: String
