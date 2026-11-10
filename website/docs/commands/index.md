@@ -24,7 +24,7 @@ Not connected yet? Start with [Connect-Windows365](./Connect-Windows365.mdx) and
 | --- | --- |
 | [Connect-Windows365](./Connect-Windows365.mdx) | Connect to Windows 365 via Powershell |
 | [Disconnect-Windows365](./Disconnect-Windows365.mdx) | Disconnects from Windows 365 and clears the token cache. |
-| [Export-CPCProvisioningPolicy](./Export-CPCProvisioningPolicy.mdx) | Returns all Provisioning Policy's or Provisioning Policy's with a specific name |
+| [Export-CPCProvisioningPolicy](./Export-CPCProvisioningPolicy.mdx) | Exports a Cloud PC Provisioning Policy to a JSON file |
 | [Get-CloudApp](./Get-CloudApp.mdx) | Returns all Cloud PC Apps or Cloud PC Apps with a specific name |
 | [Get-CloudPC](./Get-CloudPC.mdx) | Returns all CloudPC's or CloudPC's with a specific name |
 | [Get-CPCAuditEvent](./Get-CPCAuditEvent.mdx) | Returns Cloud PC audit events |
@@ -55,7 +55,7 @@ Not connected yet? Start with [Connect-Windows365](./Connect-Windows365.mdx) and
 | [Invoke-CPCRetryPartnerAgentInstallation](./Invoke-CPCRetryPartnerAgentInstallation.mdx) | Retries installation of partner agents that failed to install on a Cloud PC |
 | [Invoke-CPCTroubleshoot](./Invoke-CPCTroubleshoot.mdx) | Triggers a troubleshoot action on a Cloud PC |
 | [Invoke-CPCUnpublishCloudApp](./Invoke-CPCUnpublishCloudApp.mdx) | UnPublishes a Cloud App to make it unavailable to users |
-| [New-CPCAzureNetworkConnection](./New-CPCAzureNetworkConnection.mdx) | Adds a new Provisioning Policy |
+| [New-CPCAzureNetworkConnection](./New-CPCAzureNetworkConnection.mdx) | Adds a new Azure Network Connection |
 | [New-CPCCustomImage](./New-CPCCustomImage.mdx) | Adds a new Custom Image |
 | [New-CPCProvisioningPolicy](./New-CPCProvisioningPolicy.mdx) | Adds a new Provisioning Policy |
 | [New-CPCUserSettingsPolicy](./New-CPCUserSettingsPolicy.mdx) | Creates new Cloud PC User Settings Policy |

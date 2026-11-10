@@ -1,5 +1,5 @@
 ---
-description: "Returns all Provisioning Policy's or Provisioning Policy's with a specific name"
+description: "Exports a Cloud PC Provisioning Policy to a JSON file"
 id: Export-CPCProvisioningPolicy
 title: Export-CPCProvisioningPolicy
 keywords:
@@ -15,7 +15,7 @@ custom_edit_url: https://github.com/Windows365Management/PSCloudPC/blob/develop/
 
 ## SYNOPSIS
 
-Returns all Provisioning Policy's or Provisioning Policy's with a specific name
+Exports a Cloud PC Provisioning Policy to a JSON file
 
 ## SYNTAX
 
@@ -26,7 +26,8 @@ Export-CPCProvisioningPolicy -Name <String> -OutputFolder <String> [-ProgressAct
 
 ## DESCRIPTION
 
-The function will return all Provisioning Policy's or Provisioning Policy's with a specific name
+The function will export the Provisioning Policy with the specified name to a JSON file named after the policy.
+Use Import-CPCProvisioningPolicy to import it.
 
 ## EXAMPLES
 
@@ -56,7 +57,7 @@ Accept wildcard characters: False
 
 ### -OutputFolder
 
-_No description available._
+Enter the folder to save the JSON file in
 
 ```yaml
 Type: String

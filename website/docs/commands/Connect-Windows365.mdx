@@ -78,7 +78,7 @@ Connect-Windows365 -TenantID contoso.onmicrosoft.com -ClientID 12345678-1234-123
 ### EXAMPLE 4
 
 ```powershell
-Connect-Windows365 -TenantID contoso.onmicrosoft.com -ClientID 12345678-1234-1234-1234-123456789012 -ClientCertificate "Certificate"
+Connect-Windows365 -TenantID contoso.onmicrosoft.com -ClientID 12345678-1234-1234-1234-123456789012 -ClientCertificate (Get-PfxCertificate -FilePath ./app.pfx)
 ```
 
 ### EXAMPLE 5
@@ -139,7 +139,9 @@ Accept wildcard characters: False
 
 ### -ClientCertificate
 
-Client Certificate for Service Principal Authentication, this must be the actual certificate not only the thumbprint
+Client Certificate for Service Principal Authentication.
+This must be an X509Certificate2 object that includes its private key, not only the thumbprint.
+The app registration needs the Microsoft Graph application permissions granted with admin consent.
 
 ```yaml
 Type: X509Certificate2

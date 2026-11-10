@@ -25,7 +25,9 @@ Get-CPCUserSettingsPolicy [-Name <String>] [-ProgressAction <ActionPreference>] 
 
 ## DESCRIPTION
 
-The function will return all User Setting Policy's or User Setting Policy's with a specific name
+The function will return all User Setting Policy's or User Setting Policy's with a specific name.
+The name must match exactly, but is not case-sensitive.
+When no policy matches, nothing is returned.
 
 ## EXAMPLES
 
@@ -33,6 +35,12 @@ The function will return all User Setting Policy's or User Setting Policy's with
 
 ```powershell
 Get-CPCUserSettingsPolicy -name "UserSettingPolicy01"
+```
+
+### EXAMPLE 2
+
+```powershell
+Get-CPCUserSettingsPolicy
 ```
 
 ## PARAMETERS
@@ -78,5 +86,8 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## OUTPUTS
 
 ## NOTES
+
+Required permission: CloudPC.Read.All
+https://learn.microsoft.com/graph/api/virtualendpoint-list-usersettings?view=graph-rest-beta
 
 ## RELATED LINKS

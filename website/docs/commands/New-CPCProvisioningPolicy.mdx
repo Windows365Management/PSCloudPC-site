@@ -158,7 +158,7 @@ Accept wildcard characters: False
 
 ### -DomainJoinType
 
-Enter the Domain Join Type for the Provisioning Policy (AzureADJoin or AzureADDomainJoin) (Default: AzureADJoin)
+Enter the Domain Join Type for the Provisioning Policy (azureADJoin or hybridAzureADJoin) (Default: azureADJoin)
 
 ```yaml
 Type: String
@@ -270,7 +270,8 @@ Accept wildcard characters: False
 
 ### -EnableSingleSignOn
 
-_No description available._
+Enable or disable single sign-on for the Cloud PCs ($true or $false).
+$true is only supported with DomainJoinType azureADJoin
 
 ```yaml
 Type: Boolean

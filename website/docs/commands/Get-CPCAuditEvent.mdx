@@ -20,13 +20,14 @@ Returns Cloud PC audit events
 ## SYNTAX
 
 ```powershell
-Get-CPCAuditEvent [-Activity <String>] [-Top <Int32>] [-ProgressAction <ActionPreference>] [<CommonParameters>]
+Get-CPCAuditEvent [-ActivityType <String>] [-Top <Int32>] [-ProgressAction <ActionPreference>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
 
 The function will return all Cloud PC audit events, or audit events filtered
-by activity name.
+by activity type.
 Audit events record every create, update, and delete
 operation performed on Cloud PC resources and are useful for compliance,
 troubleshooting, and change tracking.
@@ -51,23 +52,23 @@ Get-CPCAuditEvent -Top 25
 ### EXAMPLE 3
 
 ```powershell
-Get-CPCAuditEvent -Activity "Reprovision cloudPc"
+Get-CPCAuditEvent -ActivityType "Create CloudPcProvisioningPolicy"
 ```
 
 ## PARAMETERS
 
-### -Activity
+### -ActivityType
 
-Filter audit events by activity name, e.g.
-"Update cloudPC" or
-"Reprovision cloudPc".
-Use Get-CPCAuditEvent first to discover activity names
+Filter audit events by activity type, e.g.
+"Create CloudPcProvisioningPolicy" or
+"Patch CloudPcUserSetting".
+Use Get-CPCAuditEvent first to discover activity types
 in your tenant.
 
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: Activity
 
 Required: False
 Position: Named

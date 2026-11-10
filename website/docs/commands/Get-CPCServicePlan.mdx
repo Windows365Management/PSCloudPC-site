@@ -20,32 +20,35 @@ This function will return all currently available service plans
 ## SYNTAX
 
 ```powershell
-Get-CPCServicePlan [-ServicePlanName <String>] [-ProgressAction <ActionPreference>] [<CommonParameters>]
+Get-CPCServicePlan [[-ServicePlanName] <String>] [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
 
-This function will return all currently available service plans
+This function will return all currently available service plans, or the service plan
+whose display name exactly matches -ServicePlanName (case-insensitive).
+The servicePlans endpoint does not support OData query parameters, so all plans are
+retrieved (following paging) and the name is matched on the client.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 
 ```powershell
-Get-CPCServicePlans
+Get-CPCServicePlan
 ```
 
 ### EXAMPLE 2
 
 ```powershell
-Get-CPCServicePlans -ServicePlanType "enterprise"
+Get-CPCServicePlan -ServicePlanName "Cloud PC Enterprise 2vCPU/8GB/128GB"
 ```
 
 ## PARAMETERS
 
 ### -ServicePlanName
 
-_No description available._
+Enter the exact display name of the service plan you want to retrieve, for example "Cloud PC Enterprise 2vCPU/8GB/128GB"
 
 ```yaml
 Type: String
@@ -53,7 +56,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: Named
+Position: 1
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -84,5 +87,8 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## OUTPUTS
 
 ## NOTES
+
+Required permission: CloudPC.Read.All
+https://learn.microsoft.com/graph/api/virtualendpoint-list-serviceplans?view=graph-rest-beta
 
 ## RELATED LINKS
