@@ -66,7 +66,16 @@ const config = {
           editUrl: `${siteRepoUrl}/tree/main/website/`,
           showLastUpdateTime: false,
         },
-        blog: false,
+        blog: {
+          showReadingTime: true,
+          feedOptions: {
+            type: ["rss", "atom"],
+            xslt: true,
+          },
+          editUrl: `${siteRepoUrl}/tree/main/website/`,
+          onInlineAuthors: "warn",
+          onUntruncatedBlogPosts: "warn",
+        },
         theme: {
           customCss: "./src/css/custom.css",
         },
@@ -120,6 +129,7 @@ const config = {
             position: "left",
             label: "Cmdlets",
           },
+          { to: "/blog", label: "Blog", position: "left" },
           { to: "/contributing", label: "Contributing", position: "left" },
           { to: "/about", label: "About", position: "left" },
           {
